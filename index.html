@@ -1,25 +1,55 @@
-<body>
-  <div class="container">
-    <h1>Path of Exile Ratio Calculator</h1>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PoE Ratio Calculator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
 
-    <div class="ratio-section">
+<body>
+  <div class="window">
+
+    <div class="title-bar">
+      CURRENCY EXCHANGE CALCULATOR
+    </div>
+
+    <div class="section">
       <h2>Desired Ratio</h2>
-      <div class="ratio-inputs">
-        <input id="want" type="number" placeholder="I want (e.g., 1)">
-        <span>:</span>
-        <input id="offer" type="number" step="0.01" placeholder="I have (e.g., 2.8)">
+
+      <div class="ratio-boxes">
+
+        <div class="ratio-panel">
+          <div class="panel-title">I WANT</div>
+          <input id="want" type="number" value="1">
+          <div class="modified-label">Modified:</div>
+          <div id="wantModified" class="modified-value">1</div>
+        </div>
+
+        <div class="ratio-separator">:</div>
+
+        <div class="ratio-panel">
+          <div class="panel-title">I HAVE</div>
+          <input id="offer" type="number" step="0.01" value="2.8">
+          <div class="modified-label">Modified:</div>
+          <div id="offerModified" class="modified-value">2.8</div>
+        </div>
+
+      </div>
+
+      <div class="slider-box">
+        <label>Adjust Ratio</label>
+        <input id="ratioSlider" type="range" min="-50" max="50" value="0">
       </div>
     </div>
 
-    <div class="input-row">
-      <label>How many items do you have?</label>
-      <input id="items" type="number" placeholder="Enter total items (e.g., 1100)">
+    <div class="section">
+      <h2>How many items do you have?</h2>
+      <input id="items" type="number" value="1100">
     </div>
 
-    <button onclick="calculate()">Calculate Trade</button>
+    <div id="output" class="results"></div>
 
-    <div id="output" class="result"></div>
   </div>
 
   <script src="script.js"></script>
 </body>
+</html>
