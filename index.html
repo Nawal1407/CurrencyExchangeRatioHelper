@@ -1,23 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Path of Exile Ratio Calculator</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-
 <body>
   <div class="container">
     <h1>Path of Exile Ratio Calculator</h1>
 
-    <div class="exchange-box">
-      <div class="panel">
-        <h2>I WANT</h2>
-        <input id="want" type="number" placeholder="Amount you want (e.g., 1)">
-      </div>
-
-      <div class="panel">
-        <h2>I HAVE</h2>
-        <input id="offer" type="number" step="0.01" placeholder="Amount you offer (e.g., 2.8)">
+    <div class="ratio-section">
+      <h2>Desired Ratio</h2>
+      <div class="ratio-inputs">
+        <input id="want" type="number" placeholder="I want (e.g., 1)">
+        <span>:</span>
+        <input id="offer" type="number" step="0.01" placeholder="I have (e.g., 2.8)">
       </div>
     </div>
 
@@ -33,4 +23,3 @@
 
   <script src="script.js"></script>
 </body>
-</html>
