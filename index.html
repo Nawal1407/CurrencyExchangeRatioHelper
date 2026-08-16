@@ -43,10 +43,12 @@ function calculate() {
         return [a * scale, b * scale];
     }
 
+    // If either side is decimal, convert to whole-number ratio
     if (!Number.isInteger(want) || !Number.isInteger(offer)) {
         [want, offer] = toWhole(want, offer);
     }
 
+    // Now offer is guaranteed whole-number
     const maxBlocks = Math.floor(items / offer);
 
     if (maxBlocks < 1) {
@@ -95,8 +97,5 @@ function calculate() {
     `;
 }
 </script>
-
-
-
 </body>
 </html>
