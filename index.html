@@ -26,55 +26,65 @@
 <script>
 function calculate() {
     const ratioInput = document.getElementById("ratio").value;
-    const items = parseFloat(document.getElementById("items").value);
+    const items = parseInt(document.getElementById("items").value);
 
     if (!ratioInput.includes(":")) {
         document.getElementById("output").innerHTML = "Invalid ratio format.";
         return;
     }
 
-    const [left, right] = ratioInput.split(":").map(Number);
+    const [want, offer] = ratioInput.split(":").map(Number);
 
-    // Normalize ratio so it's always "currency per item"
-    const ratio = left / right;
+    // How many full trades can we make?
+    const maxBlocks = Math.floor(items / offer);
 
-    const lowestItems = 1;
-    const middleItems = Math.floor(items / 2);
-    const highestItems = items;
+    if (maxBlocks < 1) {
+        document.getElementById("output").innerHTML = `
+            <h3>Results</h3>
+            You do not have enough items to complete even one trade block.
+        `;
+        return;
+    }
 
-    function calc(x) {
+    const lowestBlocks = 1;
+    const middleBlocks = Math.floor(maxBlocks / 2);
+    const highestBlocks = maxBlocks;
+
+    function trade(blocks) {
         return {
-            raw: ratio * x,
-            floor: Math.floor(ratio * x),
-            ceil: Math.ceil(ratio * x)
+            offerItems: blocks * offer,
+            receiveItems: blocks * want
         };
     }
 
-    const low = calc(lowestItems);
-    const mid = calc(middleItems);
-    const high = calc(highestItems);
+    const low = trade(lowestBlocks);
+    const mid = trade(middleBlocks);
+    const high = trade(highestBlocks);
+
+    const remainder = items - high.offerItems;
 
     document.getElementById("output").innerHTML = `
       <h3>Results</h3>
-      <b>Ratio:</b> ${ratioInput} → ${ratio.toFixed(4)} currency per item<br><br>
 
-      <b>Lowest trade (1 item):</b><br>
-      Raw: ${low.raw.toFixed(4)}<br>
-      Floor: ${low.floor}<br>
-      Ceil: ${low.ceil}<br><br>
+      <b>Ratio:</b> ${ratioInput}<br><br>
 
-      <b>Middle trade (${middleItems} items):</b><br>
-      Raw: ${mid.raw.toFixed(4)}<br>
-      Floor: ${mid.floor}<br>
-      Ceil: ${mid.ceil}<br><br>
+      <b>Lowest trade (1 block):</b><br>
+      Offer: ${low.offerItems}<br>
+      Receive: ${low.receiveItems}<br><br>
 
-      <b>Highest trade (${highestItems} items):</b><br>
-      Raw: ${high.raw.toFixed(4)}<br>
-      Floor: ${high.floor}<br>
-      Ceil: ${high.ceil}<br>
+      <b>Middle trade (${middleBlocks} blocks):</b><br>
+      Offer: ${mid.offerItems}<br>
+      Receive: ${mid.receiveItems}<br><br>
+
+      <b>Highest trade (${highestBlocks} blocks):</b><br>
+      Offer: ${high.offerItems}<br>
+      Receive: ${high.receiveItems}<br><br>
+
+      <b>Remainder:</b> ${remainder} items cannot be traded.
     `;
 }
 </script>
+
 
 </body>
 </html>
