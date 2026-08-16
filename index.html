@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PoE Ratio Calculator</title>
+  <style>
+    body { font-family: Arial; max-width: 600px; margin: auto; padding: 20px; }
+    input { width: 100%; padding: 8px; margin: 6px 0; }
+    button { padding: 10px 20px; margin-top: 10px; }
+    .result { margin-top: 20px; padding: 10px; background: #eee; }
+  </style>
+</head>
+<body>
+
+<h2>Path of Exile Ratio Calculator</h2>
+
+<label>Ratio (example: 10:1 or 1.78:1)</label>
+<input id="ratio" placeholder="10:1">
+
+<label>How many items do you have?</label>
+<input id="items" type="number" placeholder="200">
+
+<button onclick="calculate()">Calculate</button>
+
+<div id="output" class="result"></div>
+
+<script>
+function calculate() {
+    const ratioInput = document.getElementById("ratio").value;
+    const items = parseFloat(document.getElementById("items").value);
+
+    if (!ratioInput.includes(":")) {
+        document.getElementById("output").innerHTML = "Invalid ratio format.";
+        return;
+    }
+
+    const [left, right] = ratioInput.split(":").map(Number);
+
+    // Normalize ratio so it's always "currency per item"
+    const ratio = left / right;
+
+    const lowestItems = 1;
+    const middleItems = Math.floor(items / 2);
+    const highestItems = items;
+
+    function calc(x) {
+        return {
+            raw: ratio * x,
+            floor: Math.floor(ratio * x),
+            ceil: Math.ceil(ratio * x)
+        };
+    }
+
+    const low = calc(lowestItems);
+    const mid = calc(middleItems);
+    const high = calc(highestItems);
+
+    document.getElementById("output").innerHTML = `
+      <h3>Results</h3>
+      <b>Ratio:</b> ${ratioInput} → ${ratio.toFixed(4)} currency per item<br><br>
+
+      <b>Lowest trade (1 item):</b><br>
+      Raw: ${low.raw.toFixed(4)}<br>
+      Floor: ${low.floor}<br>
+      Ceil: ${low.ceil}<br><br>
+
+      <b>Middle trade (${middleItems} items):</b><br>
+      Raw: ${mid.raw.toFixed(4)}<br>
+      Floor: ${mid.floor}<br>
+      Ceil: ${mid.ceil}<br><br>
+
+      <b>Highest trade (${highestItems} items):</b><br>
+      Raw: ${high.raw.toFixed(4)}<br>
+      Floor: ${high.floor}<br>
+      Ceil: ${high.ceil}<br>
+    `;
+}
+</script>
+
+</body>
+</html>
