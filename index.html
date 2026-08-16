@@ -10,92 +10,29 @@
   </style>
 </head>
 <body>
+  <div class="container">
+    <h1>Path of Exile Ratio Calculator</h1>
 
-<h2>Path of Exile Ratio Calculator</h2>
+    <div class="exchange-box">
+      <div class="panel">
+        <h2>I WANT</h2>
+        <input id="want" type="number" placeholder="Amount you want (e.g., 1)">
+      </div>
 
-<label>Ratio (example: 10:1 or 1.78:1)</label>
-<input id="ratio" placeholder="10:1">
+      <div class="panel">
+        <h2>I HAVE</h2>
+        <input id="offer" type="number" step="0.01" placeholder="Amount you offer (e.g., 2.8)">
+      </div>
+    </div>
 
-<label>How many items do you have?</label>
-<input id="items" type="number" placeholder="200">
+    <div class="input-row">
+      <label>How many items do you have?</label>
+      <input id="items" type="number" placeholder="Enter total items (e.g., 1100)">
+    </div>
 
-<button onclick="calculate()">Calculate</button>
+    <button onclick="calculate()">Calculate Trade</button>
 
-<div id="output" class="result"></div>
-
-<script>
-function calculate() {
-    const ratioInput = document.getElementById("ratio").value;
-    const items = parseFloat(document.getElementById("items").value);
-
-    if (!ratioInput.includes(":")) {
-        document.getElementById("output").innerHTML = "Invalid ratio format.";
-        return;
-    }
-
-    let [want, offer] = ratioInput.split(":").map(Number);
-
-    // Convert decimal ratio into exact whole-number ratio
-    function toWhole(a, b) {
-        const aDec = (a.toString().split(".")[1] || "").length;
-        const bDec = (b.toString().split(".")[1] || "").length;
-        const scale = Math.pow(10, Math.max(aDec, bDec));
-        return [a * scale, b * scale];
-    }
-
-    // If either side is decimal, convert to whole-number ratio
-    if (!Number.isInteger(want) || !Number.isInteger(offer)) {
-        [want, offer] = toWhole(want, offer);
-    }
-
-    // Now offer is guaranteed whole-number
-    const maxBlocks = Math.floor(items / offer);
-
-    if (maxBlocks < 1) {
-        document.getElementById("output").innerHTML = `
-            <h3>Results</h3>
-            You do not have enough items to complete even one trade block.
-        `;
-        return;
-    }
-
-    const lowestBlocks = 1;
-    const middleBlocks = Math.floor(maxBlocks / 2);
-    const highestBlocks = maxBlocks;
-
-    function trade(blocks) {
-        return {
-            offerItems: blocks * offer,
-            receiveItems: blocks * want
-        };
-    }
-
-    const low = trade(lowestBlocks);
-    const mid = trade(middleBlocks);
-    const high = trade(highestBlocks);
-
-    const remainder = items - high.offerItems;
-
-    document.getElementById("output").innerHTML = `
-      <h3>Results</h3>
-
-      <b>Ratio:</b> ${ratioInput} → closest whole-number ratio ${want}:${offer}<br><br>
-
-      <b>Lowest trade (1 block):</b><br>
-      Offer: ${low.offerItems}<br>
-      Receive: ${low.receiveItems}<br><br>
-
-      <b>Middle trade (${middleBlocks} blocks):</b><br>
-      Offer: ${mid.offerItems}<br>
-      Receive: ${mid.receiveItems}<br><br>
-
-      <b>Highest trade (${highestBlocks} blocks):</b><br>
-      Offer: ${high.offerItems}<br>
-      Receive: ${high.receiveItems}<br><br>
-
-      <b>Remainder:</b> ${remainder} items cannot be traded.
-    `;
-}
-</script>
+    <div id="output" class="result"></div>
+  </div>
 </body>
 </html>
