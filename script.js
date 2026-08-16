@@ -3,13 +3,12 @@ function calculate() {
     const offer = parseFloat(document.getElementById("offer").value);
     const items = parseFloat(document.getElementById("items").value);
 
-    // Error checking
     if (isNaN(want) || want <= 0) {
-        document.getElementById("output").innerHTML = "Error: 'I WANT' must be a positive number.";
+        document.getElementById("output").innerHTML = "Error: 'I want' must be a positive number.";
         return;
     }
     if (isNaN(offer) || offer <= 0) {
-        document.getElementById("output").innerHTML = "Error: 'I HAVE' must be a positive number.";
+        document.getElementById("output").innerHTML = "Error: 'I have' must be a positive number.";
         return;
     }
     if (isNaN(items) || items <= 0) {
@@ -17,7 +16,6 @@ function calculate() {
         return;
     }
 
-    // Convert decimal ratio into exact whole-number ratio
     function toWhole(a, b) {
         const aDec = (a.toString().split(".")[1] || "").length;
         const bDec = (b.toString().split(".")[1] || "").length;
@@ -55,13 +53,12 @@ function calculate() {
     const low = trade(lowestBlocks);
     const mid = trade(middleBlocks);
     const high = trade(highestBlocks);
-
     const remainder = items - high.offerItems;
 
     document.getElementById("output").innerHTML = `
       <h3>Results</h3>
 
-      <b>Closest whole-number ratio:</b> ${w}:${o}<br><br>
+      <b>Desired ratio:</b> ${want}:${offer} → closest whole-number ratio ${w}:${o}<br><br>
 
       <b>Lowest trade (1 block):</b><br>
       Offer: ${low.offerItems}<br>
