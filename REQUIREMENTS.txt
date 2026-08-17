@@ -1,0 +1,158 @@
+REQUIREMENTS DOCUMENT
+Project: Currency Exchange Calculator
+Author: Nawal
+Version: 1.0
+Last Updated: 2026‑08‑16
+
+1. Purpose
+The Currency Exchange Calculator provides a fast, accurate way to compute trade ratios based on user‑defined values. It is designed for games or systems where items are exchanged in fixed ratios (e.g., PoE currency). The tool allows users to adjust ratios, compute minimum/half/maximum trades, and view remainders.
+
+2. Functional Requirements
+2.1 Ratio Inputs
+The calculator must provide two numeric inputs:
+
+I WANT
+
+I HAVE
+
+Both inputs must support:
+
+Manual typing
+
+Increment/decrement via custom ▲ ▼ buttons
+
+When one value changes (via typing or arrow buttons), the other value must automatically reset to 1.
+
+2.2 Increment Control
+Increment amount must be user‑selectable: 0.01, 0.1, 0.5.
+
+Increment selection must be hidden inside an Options modal.
+
+Increment must default to 0.1, unless a saved value exists.
+
+2.3 Items Input
+A third numeric input labeled Number of Items must be provided.
+
+This input must visually match the ratio panels in style and width.
+
+It must be placed directly under the ratio section, left‑aligned.
+
+2.4 Trade Calculations
+The system must compute:
+
+Minimum trade
+
+Half trade
+
+Maximum trade
+
+Each trade must display:
+
+The computed ratio (whole numbers)
+
+The remainder after trade
+
+2.5 Fallback Behavior
+If the user’s ratio cannot produce at least one trade:
+
+Display an error box.
+
+Display the last valid ratio as a fallback.
+
+Display the last valid trade results.
+
+2.6 Persistent Storage
+The following values must be saved and restored automatically:
+
+I WANT
+
+I HAVE
+
+Number of Items
+
+Increment amount
+
+Storage must use localStorage, not cookies.
+
+2.7 Options Modal
+Must open when clicking the gear icon.
+
+Must close when clicking outside the modal.
+
+Must contain:
+
+Header: Options
+
+Subtitle: Step Increments
+
+Increment radio buttons
+
+2.8 UI Layout Requirements
+All ratio components must be left‑aligned.
+
+“Desired Ratio” and “Number of Items” headers must be:
+
+Left‑aligned
+
+Slightly indented
+
+Styled identically
+
+Items panel width must equal:
+
+WANT panel width
+
+colon width
+
+HAVE panel width
+
+The calculator must maintain a consistent PoE‑style theme.
+
+3. Non‑Functional Requirements
+3.1 Usability
+UI must be intuitive and readable.
+
+No browser default number arrows may appear.
+
+Modal must not shift page layout.
+
+3.2 Performance
+All calculations must be instantaneous.
+
+No external dependencies allowed.
+
+3.3 Compatibility
+Must work in all modern browsers:
+
+Chrome
+
+Firefox
+
+Edge
+
+Safari
+
+3.4 Maintainability
+Code must be modular and readable.
+
+CSS must be organized by component.
+
+4. Constraints
+No external libraries (e.g., jQuery).
+
+No server‑side code.
+
+No cookies (localStorage only).
+
+No layout shifting when modal opens.
+
+5. Future Enhancements (Optional)
+Preset ratio dropdown
+
+Swap ratio sides button
+
+Reset all settings
+
+PoE currency icons
+
+Multiple saved profiles
