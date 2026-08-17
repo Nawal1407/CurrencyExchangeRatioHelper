@@ -12,42 +12,73 @@
       CURRENCY EXCHANGE CALCULATOR
     </div>
 
-    <div class="section">
-      <h2>Desired Ratio</h2>
+    <div class="section ratio-section">
 
-      <div class="ratio-boxes">
+      <div class="ratio-header">
+        <h2 class="section-title">Desired Ratio</h2>
+        <div id="optionsGear" class="gear-icon">⚙️</div>
+      </div>
 
+      <div class="ratio-row-block">
+
+        <!-- I WANT -->
         <div class="ratio-panel">
           <div class="panel-title">I WANT</div>
-          <input id="want" type="number" value="1">
-          <div class="modified-label">Modified:</div>
-          <div id="wantModified" class="modified-value">1.000</div>
+          <div class="ratio-row">
+            <input id="want" type="number" value="1">
+            <div class="arrow-box">
+              <button id="wantUp">▲</button>
+              <button id="wantDown">▼</button>
+            </div>
+          </div>
         </div>
 
+        <!-- Centered colon -->
         <div class="ratio-separator">:</div>
 
+        <!-- I HAVE -->
         <div class="ratio-panel">
           <div class="panel-title">I HAVE</div>
-          <input id="offer" type="number" step="0.01" value="2.8">
-          <div class="modified-label">Modified:</div>
-          <div id="offerModified" class="modified-value">2.800</div>
+          <div class="ratio-row">
+            <input id="offer" type="number" step="0.01" value="1">
+            <div class="arrow-box">
+              <button id="offerUp">▲</button>
+              <button id="offerDown">▼</button>
+            </div>
+          </div>
         </div>
 
       </div>
 
-      <div class="slider-box">
-        <label>Adjust Ratio</label>
-        <input id="ratioSlider" type="range" min="-50" max="50" value="0">
-      </div>
-    </div>
+      <div class="items-block">
+        <h2 class="section-title">Number of Items</h2>
 
-    <div class="section">
-      <h2>How many items do you have?</h2>
-      <input id="items" type="number" value="1100">
+        <div class="items-panel wide-items-panel">
+          <input id="items" type="number" value="1100">
+        </div>
+      </div>
+
     </div>
 
     <div id="output" class="results"></div>
 
+  </div>
+
+  <!-- Floating modal -->
+  <div id="optionsModal" class="options-modal">
+    <div class="options-content">
+
+      <div class="modal-header">Options</div>
+
+      <div class="modal-subtitle">Step Increments</div>
+
+      <div class="increment-stack">
+        <label><input type="radio" name="inc" value="0.01"> 0.01</label>
+        <label><input type="radio" name="inc" value="0.1" checked> 0.1</label>
+        <label><input type="radio" name="inc" value="0.5"> 0.5</label>
+      </div>
+
+    </div>
   </div>
 
   <script src="script.js"></script>
