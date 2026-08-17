@@ -1,4 +1,3 @@
-/* Predictable sizing everywhere */
 * {
   box-sizing: border-box;
 }
@@ -13,73 +12,153 @@ body {
   font-size: 14px;
 }
 
-/* Main window */
 .window {
   background: #1f1f1f;
   border: 3px solid #8b6f3d;
   border-radius: 10px;
-  width: 700px;
+  width: 650px;
   max-height: 800px;
   overflow-y: auto;
   padding: 15px;
   box-shadow: 0 0 25px rgba(0,0,0,0.7);
 }
 
-/* Title bar */
 .title-bar {
   background: linear-gradient(#3a2a1a, #2a1a0a);
   border: 2px solid #8b6f3d;
-  padding: 10px;
+  padding: 8px;
   text-align: center;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
   color: #f0e0a0;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
   border-radius: 6px;
 }
 
-/* Section blocks */
 .section {
   background: #262626;
   border: 2px solid #8b6f3d;
-  padding: 12px;
+  padding: 10px;
   border-radius: 8px;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
 }
 
-.section h2 {
-  text-align: center;
-  margin-bottom: 8px;
+.section-title {
+  margin: 0 0 6px 2px;
+  font-size: 15px;
+  color: #e8d49a;
+  text-align: left;
+}
+
+.ratio-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gear-icon {
+  cursor: pointer;
+  font-size: 20px;
   color: #e8d49a;
 }
 
-/* Ratio boxes */
-.ratio-boxes {
+.ratio-row-block {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 15px;
-  margin-bottom: 10px;
+  align-items: center;
+  gap: 12px;
+  justify-content: flex-start;
+  margin-left: 2px;
 }
 
-/* Individual ratio panels */
 .ratio-panel {
   background: #151515;
   border: 2px solid #8b6f3d;
-  padding: 10px;
-  width: 160px;
+  padding: 8px;
+  width: 150px;
   border-radius: 6px;
   text-align: center;
-  overflow: hidden;
 }
 
 .panel-title {
-  font-size: 14px;
-  margin-bottom: 6px;
+  font-size: 13px;
+  margin-bottom: 4px;
   color: #e8d49a;
 }
 
+.ratio-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
 .ratio-panel input {
+  width: 70px;
+  padding: 5px;
+  background: #222;
+  color: #e0c27a;
+  border: 1px solid #8b6f3d;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* Remove browser default number arrows */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.arrow-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.arrow-box button {
+  background: #151515;
+  border: 1px solid #8b6f3d;
+  color: #e0c27a;
+  padding: 3px;
+  cursor: pointer;
+  border-radius: 4px;
+  width: 28px;
+}
+
+.arrow-box button:hover {
+  background: #2a2a2a;
+}
+
+.ratio-separator {
+  font-size: 22px;
+  color: #e8d49a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+}
+
+.items-block {
+  margin-top: 15px;
+  margin-left: 2px;
+}
+
+.items-panel {
+  background: #151515;
+  border: 2px solid #8b6f3d;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.wide-items-panel {
+  width: 330px; /* 150 + 30 + 150 */
+}
+
+.items-panel input {
   width: 100%;
   padding: 6px;
   background: #222;
@@ -90,52 +169,50 @@ body {
   font-size: 14px;
 }
 
-.modified-label {
-  margin-top: 8px;
-  font-size: 12px;
-  color: #c8b07a;
+/* Floating modal */
+.options-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
 }
 
-.modified-value {
-  background: #333;
-  border: 1px solid #8b6f3d;
-  padding: 5px;
-  margin-top: 4px;
-  border-radius: 4px;
-  font-size: 14px;
-  width: 100%;
-  overflow: hidden;
-}
-
-/* Ratio separator */
-.ratio-separator {
-  font-size: 24px;
-  color: #e0c27a;
-  margin-top: 20px;
-}
-
-/* Slider */
-.slider-box {
-  margin-top: 8px;
-  text-align: center;
-}
-
-.slider-box input {
-  width: 90%;
-}
-
-/* Item input */
-.section input[type="number"] {
-  width: 100%;
-  padding: 8px;
+.options-content {
   background: #151515;
-  color: #e0c27a;
-  border: 1px solid #8b6f3d;
-  border-radius: 4px;
-  font-size: 14px;
+  border: 2px solid #8b6f3d;
+  padding: 15px;
+  border-radius: 8px;
+  width: 200px;
+  text-align: left;
 }
 
-/* Results */
+.modal-header {
+  font-size: 16px;
+  font-weight: bold;
+  color: #e8d49a;
+  margin-bottom: 10px;
+}
+
+.modal-subtitle {
+  font-size: 13px;
+  color: #c8b07a;
+  margin-bottom: 6px;
+}
+
+.increment-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.increment-stack label {
+  color: #e8d49a;
+  font-size: 13px;
+}
+
 .results {
   background: #262626;
   border: 2px solid #8b6f3d;
@@ -143,3 +220,58 @@ body {
   border-radius: 8px;
   font-size: 14px;
 }
+
+/* Trade boxes */
+.trade-grid {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.trade-box {
+  background: #151515;
+  border: 2px solid #8b6f3d;
+  padding: 8px;
+  border-radius: 6px;
+  width: 32%;
+  text-align: center;
+}
+
+.trade-title {
+  font-size: 14px;
+  color: #e8d49a;
+  margin-bottom: 4px;
+}
+
+.trade-value {
+  font-size: 16px;
+  color: #f0e0a0;
+  margin-bottom: 4px;
+}
+
+.trade-rem {
+  font-size: 12px;
+  color: #c8b07a;
+}
+
+.error-box {
+  background: #5a1a1a;
+  border: 2px solid #a33;
+  padding: 10px;
+  margin-bottom: 10px;
+  color: #ffcccc;
+  font-weight: bold;
+  border-radius: 6px;
+}
+
+.fallback-info {
+  margin-bottom: 10px;
+  padding: 6px;
+  background: #333;
+  border: 1px solid #8b6f3d;
+  border-radius: 4px;
+  color: #e8d49a;
+  text-align: center;
+}
+```````````````
