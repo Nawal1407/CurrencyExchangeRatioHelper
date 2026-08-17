@@ -1,0 +1,182 @@
+DESIGN DOCUMENT
+Project: Currency Exchange Calculator
+Version: 1.0
+
+1. System Architecture
+The system is a fully client‑side web application consisting of:
+
+HTML: Structure and semantic layout
+
+CSS: PoE‑style theme and layout control
+
+JavaScript: Ratio logic, event handling, persistence, modal behavior
+
+No backend or external libraries are used.
+
+2. UI Layout Structure
+2.1 Overall Layout
+Code
++--------------------------------------------------+
+| CURRENCY EXCHANGE CALCULATOR                     |
++--------------------------------------------------+
+| Desired Ratio        ⚙️                           |
+| [I WANT] : [I HAVE]                               |
+| Number of Items                                     |
+| [ Items Panel ]                                   |
++--------------------------------------------------+
+| Results Section                                   |
+|  Minimum | Half | Maximum                         |
++--------------------------------------------------+
+2.2 Ratio Section
+Left‑aligned block containing:
+
+Header (“Desired Ratio”)
+
+Gear icon (opens modal)
+
+Ratio row:
+
+WANT panel
+
+Colon
+
+HAVE panel
+
+2.3 Items Section
+Styled identically to ratio header.
+
+Items panel width matches combined ratio width.
+
+2.4 Results Section
+Three equal‑width boxes:
+
+Minimum
+
+Half
+
+Maximum
+
+Each box contains:
+
+Title
+
+Ratio
+
+Remainder
+
+2.5 Options Modal
+Centered floating modal overlay.
+
+Contains:
+
+Header: “Options”
+
+Subtitle: “Step Increments”
+
+Radio buttons for increment selection
+
+3. Visual Design
+3.1 Theme
+Dark PoE‑inspired palette:
+
+Background: #0f0f0f
+
+Panels: #151515
+
+Borders: #8b6f3d
+
+Text: #e0c27a / #e8d49a
+
+3.2 Typography
+Font: Arial
+
+Sizes:
+
+Title bar: 18px
+
+Section headers: 15px
+
+Panel titles: 13px
+
+Inputs: 14px
+
+3.3 Spacing
+8–12px padding inside panels
+
+12–18px gaps between ratio components
+
+2px left indent for headers
+
+4. Interaction Design
+4.1 Ratio Adjustment
+Clicking ▲ increases value by increment.
+
+Clicking ▼ decreases value by increment.
+
+Changing WANT resets HAVE to 1.
+
+Changing HAVE resets WANT to 1.
+
+4.2 Modal Behavior
+Gear icon opens modal.
+
+Clicking outside modal closes it.
+
+Modal does not affect layout.
+
+4.3 Persistence
+All inputs save on change.
+
+All inputs restore on page load.
+
+5. Calculation Logic
+5.1 Whole Number Conversion
+Convert decimals to whole numbers by scaling based on decimal precision.
+
+5.2 Trade Computation
+Minimum = 1 block
+
+Half = floor(maxBlocks / 2)
+
+Maximum = maxBlocks
+
+5.3 Remainder
+remainder = items - (offerWhole * blocks)
+
+5.4 Fallback Logic
+If maxBlocks < 1:
+
+Show error box
+
+Show last valid ratio
+
+Show last valid results
+
+6. File Structure
+Code
+project/
+│ index.html
+│ styles.css
+│ script.js
+7. Risks & Mitigations
+Risk	Mitigation
+User enters invalid numbers	Input validation + fallback
+Modal blocks interaction	Click‑outside close
+Layout breaks on small screens	Fixed widths + flexbox
+Browser arrows appear	CSS removal rules
+
+
+8. Acceptance Criteria
+All ratio logic works correctly
+
+Modal opens/closes correctly
+
+All values persist
+
+Items panel matches ratio width
+
+Headers match styling and alignment
+
+No layout shifting
+
+No browser number arrows
